@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <title>AngularJS - W3 Schools</title>
+</head>
+<body>
+<div ng-app="myApp">
+    <p>Name:<input type="text" ng-model="name"></p>
+    {{name}}
+    <p ng-init="firstname='Balakrishna'"></p>
+    <span ng-bind="firstname"></span>
+    <p>Sum of 5+5 = {{5+5}}</p>
+    <div ng-controller="myCtrl">
+        <input type="text" ng-model="firstName"><br/>
+        <input type="text" ng-model="lastName">
+        <br/>
+        Fullname: {{firstName + lastName}}
+        <h1 ng-click="changeName()">{{firstName}}</h1>
+        full name:<h1>{{fullName()}}</h1>
+        filter: <h1>{{fullName() | uppercase}}</h1>
+        price: {{price | currency: 'INR'}}
+        <table border="1", width="100%">
+            <tr>
+                <th>SNo</th>
+                <th ng-click="orderByMe('name')">name</th>
+                <th ng-click="orderByMe('country')">county</th>
+            </tr>
+            <tr ng-repeat="x in people | orderBy: myOrderBy">
+                <td>{{ $index + 1 }}</td>
+                <td ng-if="$odd" style="background-color: #f1f1f1">{{x.name}}</td>
+                <td ng-if="$even" style="background-color: #ffffff">{{x.name}}</td>
+                <td ng-if="$odd" style="background-color: #f1f1f1">{{x.country}}</td>
+                <td ng-if="$even" style="background-color: #ffffff">{{x.country}}</td>
+            </tr>
+        </table>
+        <table border="1", width="100%">
+            <tr>
+                <th>name</th>
+                <th>county</th>
+            </tr>
+            <tr ng-repeat="x in people">
+                <td>{{x.name | myFilter}}</td>
+                <td>{{x.country |  myFilter}}</td>
+            </tr>
+        </table>
+        my-url: {{myUrl}}<br/>
+        welcomeMsg: {{welcomeMsg}}
+        <br/>
+        {{myHeader}}<br/>
+        {{currentTime}}<br/>
+        hexa decimal number 255: {{hex}}<br/>
+        hexa number: <input type="number", ng-model="hexa_number"> {{ hexa_number | myFormat}}
+        <!--<input type="number", ng-model="hexa_number | myFormat">-->
+        <br/>
+        <select ng-model="selectedName" ng-options="x.country for x in people"></select>
+        <br/>
+        Selected Name: {{selectedName.name}}<br/>
+        Selected Country: {{selectedName.country}}
+        <br/>
+        selectedCar: <select ng-model="selectedCar" ng-options="x for (x,y) in cars"></select>
+        {{selectedCar}}<br/>
+        <span ng-mousemove="count = count+1">Hello!!!!!!!!1</span>
+        <br/>
+        {{count}}
+        <br/>
+        <button ng-click="myFunc()">Click Me!</button>
+        <br/>
+        <p ng-show="showMe">fg fg sdfgdsfg fdg dfsgsdf gdfgd ffdg fsdgsd</p>
+        <br/>
+        <form>
+            <input type="radio" ng-model="myVal" value="tuts">tuts
+            <input type="radio" ng-model="myVal" value="cars">cars
+        </form>
+        <div ng-switch="myVal">
+            <div ng-switch-when="cars">
+                <h1>Cars</h1>
+                <p>Ambasiddor</p>
+            </div>
+            <div ng-switch-when="tuts">
+                <h1>Tutorials</h1>
+                <p>Tutorials</p>
+            </div>
+        </div>
+    </div>
+    <div ng-init="myCol='lightblue'">
+        <input type="text" style="background-color:{{myCol}}" ng-model="myCol" value="{{myCol}}">
+    </div>
+    <div ng-init="q=5;c=6">
+        q*c = <span ng-bind="q*c"></span>
+    </div>
+    <div ng-init="r={f:'bala',l:'krishna'}">
+        <p ng-bind="r.f"></p>
+    </div>
+    <div ng-init="d=[1,2,3,4]">
+        <p ng-bind="d[1]"></p>
+    </div>
+    <div w3-test></div>
+    <div ng-init="ab=['bala', 'krishna']">
+        <ul ng-repeat="x in ab">
+            <li>{{x}}</li>
+        </ul>
+    </div>
+    filter: <input type="text" ng-model="sd">
+    <div ng-init="ff=[{name: 'sda', country: 'us'},{name: 'sda2', country: 'india'},{name: 'sfdd', country: 'us'}]">
+        <ul ng-repeat="x in ff | filter: sd">
+            <li>{{x.name + ', ' + x.country}}</li>
+        </ul>
+        <ul ng-repeat="x in ff | filter: 'country'">
+            <li>{{x.name + ', ' + x.country}}</li>
+        </ul>
+    </div>
+    <!--<w3-test2></w3-test2>-->
+    <!--<div w3-test2></div>-->
+    <div class="w3-test2"></div>
+    <!-- directive: w3-test2 -->
+    <form name="myForm" ng-init="myData='post@data.com'">
+        Email: <input type="email" name="myAddress" ng-model="myData" required>
+        <span ng-show="myForm.myAddress.$error.email">Not a valid email address</span>
+        <h1>Status</h1>
+        {{myForm.myAddress.$valid}}
+        {{myForm.myAddress.$dirty}}
+        {{myForm.myAddress.$touched}}
+    </form>
+</div>
+<style>
+    input.ng-invalid{
+        background-color: lightblue;
+    }
+</style>
+<script src="myApp.js"></script>
+<script src="myCtrl.js"></script>
+</body>
+</html>
